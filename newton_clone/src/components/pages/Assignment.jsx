@@ -1,6 +1,6 @@
 import { useState } from "react";
-import AssignmentList from "../components/AssignmentList";
-import { assignments as initialAssignments } from "../data/mockData";
+import AssignmentList from "../AssignmentList";
+import { assignments as initialAssignments } from "../../data/mockData";
 
 function Assignments() {
   const [assignments, setAssignments] = useState(initialAssignments);

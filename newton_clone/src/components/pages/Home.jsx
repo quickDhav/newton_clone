@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import Card from "../components/Card";
-import { performanceData, upcomingEvents } from "../data/mockData";
+import Card from "../Card";
+import { performanceData, upcomingEvents } from "../../data/mockData";
 
 function Home({ setCurrentPage }) {
   useEffect(() => {

@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import './index.css';
 import illustration from './assets/illustration.png';
+import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
+import Home from './components/pages/Home';
+import Assignments from './components/pages/Assignment';
 
-const App = () => {
+// ── Login Page ────────────────────────────────────────────────────────────────
+function LoginPage({ onLogin }) {
   const [showPassword, setShowPassword] = useState(false);
   const [activeTab, setActiveTab] = useState('email');
 
@@ -30,17 +35,17 @@ const App = () => {
         <section className="left-panel">
           <img src={illustration} alt="Student coding at desk" className="illustration" />
         </section>
-        
+
         <section className="right-panel">
           <div className="login-container">
             <div className="tabs">
-              <div 
+              <div
                 className={`tab ${activeTab === 'email' ? 'active' : ''}`}
                 onClick={() => setActiveTab('email')}
               >
                 Email
               </div>
-              <div 
+              <div
                 className={`tab ${activeTab === 'mobile' ? 'active' : ''}`}
                 onClick={() => setActiveTab('mobile')}
               >
@@ -49,17 +54,17 @@ const App = () => {
             </div>
 
             <button className="google-btn">
-              <img 
-                src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" 
-                alt="Google" 
-                className="google-icon" 
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+                alt="Google"
+                className="google-icon"
               />
               Sign in with Google
             </button>
 
             <div className="divider">or</div>
 
-            <form>
+            <form onSubmit={(e) => { e.preventDefault(); onLogin(); }}>
               <div className="form-group">
                 <label>Email Address</label>
                 <input type="email" placeholder="Enter your email" />
@@ -67,12 +72,12 @@ const App = () => {
 
               <div className="form-group">
                 <label>Password</label>
-                <input 
-                  type={showPassword ? "text" : "password"} 
-                  placeholder="Enter your password" 
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="Enter your password"
                 />
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   className="password-toggle"
                   onClick={() => setShowPassword(!showPassword)}
                 >
@@ -82,7 +87,7 @@ const App = () => {
 
               <a href="#" className="forgot-password">Forgot Password?</a>
 
-              <button type="button" className="submit-btn">Login</button>
+              <button type="submit" className="submit-btn">Login</button>
             </form>
 
             <a href="#" className="apply-link">
@@ -93,6 +98,35 @@ const App = () => {
       </main>
     </div>
   );
+}
+
+// ── Dashboard ─────────────────────────────────────────────────────────────────
+function Dashboard() {
+  const [currentPage, setCurrentPage] = useState('home');
+
+  return (
+    <div className="flex flex-col h-screen bg-gray-50">
+      <Navbar />
+      <div className="flex flex-1 overflow-hidden">
+        <Sidebar currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        <main className="flex flex-1 overflow-y-auto">
+          {currentPage === 'home' && <Home setCurrentPage={setCurrentPage} />}
+          {currentPage === 'assignments' && <Assignments />}
+        </main>
+      </div>
+    </div>
+  );
+}
+
+// ── Root App ──────────────────────────────────────────────────────────────────
+const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  if (isLoggedIn) {
+    return <Dashboard />;
+  }
+
+  return <LoginPage onLogin={() => setIsLoggedIn(true)} />;
 };
 
 export default App;
