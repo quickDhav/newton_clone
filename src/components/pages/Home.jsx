@@ -15,7 +15,7 @@ export default function Home() {
       </div>
 
       <div className="grid grid-cols-12 gap-8">
-        {/* Left Content */}
+  
         <div className="col-span-9">
           <h3 className="text-xl font-bold mb-6">Your Performance</h3>
           <div className="grid grid-cols-2 gap-4 mb-10">
@@ -42,7 +42,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Right Content - Calendar */}
+ 
         <div className="col-span-3">
           <h3 className="text-xl font-bold mb-6">Calendar</h3>
           <div className="bg-white rounded-xl border border-gray-100 p-4 space-y-6">
