@@ -1,5 +1,5 @@
 import { useState } from "react";
-// Import Components
+
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import Home from "./components/pages/Home";
@@ -11,11 +11,11 @@ function App() {
   const [userEmail, setUserEmail] = useState("");
   const [activePage, setActivePage] = useState("Home");
 
-  // --- LOGIN / SIGNUP UI (Matches your Screenshot) ---
+
   if (!isLoggedIn) {
     return (
       <div className="min-h-screen bg-white flex flex-col font-sans">
-        {/* Top Mini Nav */}
+  
         <nav className="h-14 border-b border-gray-100 flex items-center px-8 gap-6 text-sm text-gray-500">
           {["AI Tryouts", "Coderush", "Games", "Playground", "Events"].map(item => (
             <span key={item} className="cursor-pointer hover:text-gray-900 transition-colors">{item}</span>
@@ -25,7 +25,7 @@ function App() {
         <div className="flex-1 flex items-center justify-center p-4">
           <div className="flex w-full max-w-6xl gap-12 lg:gap-24 items-center justify-center">
             
-            {/* Left Side Illustration */}
+      
             <div className="hidden lg:flex flex-1 justify-center">
               <img 
                 src="https://img.freepik.com/free-vector/programming-concept-illustration_114360-1351.jpg" 
@@ -34,7 +34,7 @@ function App() {
               />
             </div>
 
-            {/* Right Side Login Form */}
+
             <div className="flex-1 max-w-md bg-gray-50/50 p-10 rounded-2xl border border-gray-100 shadow-sm">
               <h2 className="text-xl font-bold text-gray-800 mb-6">
                 {isSignup ? "Create your account" : "Login to your account"}
@@ -101,7 +101,7 @@ function App() {
     );
   }
 
-  // --- INTERNAL UI (Shows after Login) ---
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar email={userEmail} />
