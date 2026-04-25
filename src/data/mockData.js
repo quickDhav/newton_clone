@@ -1,4 +1,4 @@
-// Data for the main Home Dashboard
+
 export const performanceData = [
   { label: "Assignments", percent: 42, done: 34, total: 81 },
   { label: "Lectures", percent: 78, done: 62, total: 80 },
@@ -12,7 +12,7 @@ export const upcomingEvents = [
   { date: "30", day: "Wed", label: "Maths-2 Quiz", time: "2:00 PM - 3:00 PM" },
 ];
 
-// Data for Subject-Specific Pages
+
 export const subjectData = {
   "FOAI Enigma": {
     performance: [
