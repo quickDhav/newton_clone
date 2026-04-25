@@ -21,7 +21,7 @@ export default function SubjectPage({ subjectName }) {
         </div>
       </div>
 
-      {/* Content Area */}
+   
       <div className="flex-1 p-8 overflow-y-auto">
         {/* Horizontal Scroll Cards */}
         <div className="flex gap-4 mb-10 overflow-x-auto pb-4 scrollbar-hide">
@@ -40,7 +40,7 @@ export default function SubjectPage({ subjectName }) {
           ))}
         </div>
 
-        {/* Performance Grid */}
+    
         <h3 className="text-lg font-bold mb-4">Your performance</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {data.performance.map((item, i) => (
