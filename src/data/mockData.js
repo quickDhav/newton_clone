@@ -14,14 +14,14 @@ export const upcomingEvents = [
 
 
 export const subjectData = {
-  "FOAI Enigma": {
+  "FOAI Turing": {
     performance: [
       { label: "Lecture", val: "74%", count: "(20/27)", icon: "📺" },
       { label: "My Assignments", val: "67%", count: "(118/175)", icon: "📄" }
     ],
     cards: [
-      { type: "In Class", title: "Binary Tree Intro", due: "due tomorrow", xp: "0/60" },
-      { type: "Post Class", title: "Linked List Lab", due: "due in 2 days", xp: "20/60" }
+      { type: "In Class", title: "Prompt Refinement Strategies, Diagnostic Prompting, Prompt Error Reduction", due: "due tomorrow", xp: "0/60" },
+      { type: "Post Class", title: "LLM Basics, Tokens, Tokenization, Context Window, Temperature & Sampling", due: "due in 2 days", xp: "20/60" }
     ]
   },
   "WAP Turing": {
