@@ -4,7 +4,7 @@ A professional learning management system (LMS) dashboard clone built with React
 
 ---
 
-## 🚀 Features
+##  Features
 
 * **Unified Dashboard**: View high-level performance across assignments, lectures, and quizzes.
 * **Subject-Specific Navigation**: Dedicated views for "FOAI Enigma," "WAP Turing," and "Maths-2 Turing" with unique stats and content.
@@ -15,7 +15,7 @@ A professional learning management system (LMS) dashboard clone built with React
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 * **Framework**: React (Vite)
 * **Styling**: Tailwind CSS
@@ -24,7 +24,7 @@ A professional learning management system (LMS) dashboard clone built with React
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```text
 src/
