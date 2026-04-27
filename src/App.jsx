@@ -106,12 +106,12 @@ function App() {
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar email={userEmail} />
       <div className="flex flex-1 overflow-hidden">
-        <Sidebar onNavigate={setActivePage} activePage={activePage} />
-        <main className="flex-1 h-[calc(100vh-64px)] overflow-y-auto">
+        {activePage === "Home" && <Sidebar onNavigate={setActivePage} activePage={activePage} />}
+        <main className="flex-1 h-[calc(100vh-64px)] overflow-y-auto w-full">
           {activePage === "Home" ? (
             <Home />
           ) : (
-            <SubjectPage subjectName={activePage} />
+            <SubjectPage subjectName={activePage} onNavigate={setActivePage} />
           )}
         </main>
       </div>
