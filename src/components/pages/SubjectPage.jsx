@@ -9,7 +9,7 @@ export default function SubjectPage({ subjectName, onNavigate }) {
   
   const data = subjectData[subjectName] || subjectData["FOAI Turing"] || {};
 
-  const tabs = ["Overview", "Lectures", "Assignments", "Quiz", "Contest"];
+  const tabs = ["Overview", "Lectures", "Assignments", "Quiz"];
 
   const handleSubjectChange = (newSubject) => {
     onNavigate(newSubject);
