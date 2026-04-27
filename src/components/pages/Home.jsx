@@ -1,5 +1,5 @@
 import Card from "../Card";
-import { performanceData, upcomingEvents } from "../../data/mockData";
+import { performanceData, lectureData, upcomingEvents } from "../../data/mockData";
 
 export default function Home() {
   return (
@@ -28,15 +28,37 @@ export default function Home() {
             ))}
           </div>
 
-          <h3 className="text-xl font-bold mb-6">Latest Lectures</h3>
-          <div className="grid grid-cols-3 gap-4">
-            {["FOAI Enigma", "WAP Turing", "Maths-2 Turing"].map((sub, i) => (
-              <div key={i} className="bg-slate-800 aspect-video rounded-xl relative overflow-hidden group cursor-pointer">
-                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
-                 <div className="absolute bottom-4 left-4">
-                    <p className="text-white font-bold">{sub}</p>
-                    <p className="text-white/60 text-xs">Latest Lecture</p>
-                 </div>
+          <div className="flex items-end justify-between mb-4 gap-4">
+            <div>
+              <h3 className="text-xl font-bold">Your lectures</h3>
+              <p className="text-sm text-gray-500 mt-1">Watch the lectures till you get a good grip on all the topics</p>
+            </div>
+            <button className="text-blue-600 font-semibold text-sm hover:underline">VIEW ALL</button>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+            {lectureData.map((lecture, i) => (
+              <div key={i} className="bg-white rounded-3xl overflow-hidden shadow-sm hover:-translate-y-1 transition-transform duration-200 cursor-pointer">
+                <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 aspect-video">
+                  <div className="absolute left-4 top-4 bg-slate-950/80 text-white text-[10px] uppercase px-2 py-1 rounded-full">{lecture.subject}</div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10 border border-white/20 text-white">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                        <path d="M8 5v14l11-7L8 5z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="absolute right-4 bottom-4 bg-slate-950/80 text-white text-[11px] px-2 py-1 rounded-full">{lecture.duration}</div>
+                </div>
+                <div className="p-4">
+                  <h4 className="font-semibold text-slate-900 mb-4">{lecture.title}</h4>
+                  <div className="flex flex-wrap items-center justify-between gap-2 text-sm text-slate-500">
+                    <span className="inline-flex items-center gap-2 text-slate-900 font-semibold">
+                      <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-amber-100 text-amber-600 text-xs font-bold">2x</span>
+                      <span>{lecture.xp}</span>
+                    </span>
+                    <span>{lecture.date}</span>
+                  </div>
+                </div>
               </div>
             ))}
           </div>

@@ -1,4 +1,4 @@
-const subjects = ["FOAI Enigma", "WAP Turing", "Maths-2 Turing"];
+const subjects = ["FOAI Turing", "WAP Turing", "Maths-2 Turing", "DSA Turing"];
 
 export default function Sidebar({ onNavigate, activePage }) {
   return (
