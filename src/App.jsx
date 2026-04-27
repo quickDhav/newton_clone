@@ -104,7 +104,7 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
-      <Navbar email={userEmail} />
+     <Navbar username={userEmail || "Guest"} />
       <div className="flex flex-1 overflow-hidden">
         {activePage === "Home" && <Sidebar onNavigate={setActivePage} activePage={activePage} />}
         <main className="flex-1 h-[calc(100vh-64px)] overflow-y-auto w-full">
