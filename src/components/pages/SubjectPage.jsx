@@ -16,14 +16,7 @@ export default function SubjectPage({ subjectName, onNavigate }) {
     setIsDropdownOpen(false);
   };
 
-  const currentLectures = [
-    { title: "Mock End-Sem", date: "Apr 27, 2026 • 1:30:00", xp: "30/30", attended: true, status: "complete" },
-    { title: "Lec 23", date: "Apr 22, 2026 • 1:30:00", xp: "30/30", attended: true, status: "complete" },
-    { title: "Agentic Workflow Optimization, Agentic Error Handling...", date: "Apr 20, 2026 • 1:30:00", xp: "30/30", attended: true, status: "complete" },
-    { title: "Ethical AI, Testing Checklist, Launch Readiness...", date: "Apr 15, 2026 • 1:30:00", xp: "30/30", attended: true, status: "play" },
-    { title: "Buffer Lec", date: "Apr 13, 2026 • 1:30:00", xp: "30/30", attended: true, status: "complete" },
-    { title: "Context Injection, Context Window Management...", date: "Apr 8, 2026 • 1:30:00", xp: "30/30", attended: false, status: "" },
-  ];
+
 
   return (
     <div className="flex h-full w-full bg-gray-50 font-sans">
@@ -138,7 +131,7 @@ export default function SubjectPage({ subjectName, onNavigate }) {
                   </div>
                   <div>
                     <h2 className="text-2xl font-bold text-gray-900 leading-tight">Lectures</h2>
-                    <p className="text-gray-500 text-sm mt-0.5 font-medium">28 lectures</p>
+                    <p className="text-gray-500 text-sm mt-0.5 font-medium">{(data.lectures || []).length} lectures</p>
                   </div>
                 </div>
                 
@@ -186,7 +179,7 @@ export default function SubjectPage({ subjectName, onNavigate }) {
                 </div>
 
                 <div className="divide-y divide-gray-100 flex flex-col gap-1 mt-1">
-                  {currentLectures.map((lec, idx) => (
+                  {(data.lectures || []).map((lec, idx) => (
                     <div key={idx} className="grid grid-cols-12 gap-4 items-center py-4 px-2 hover:bg-gray-50 transition rounded-xl group">
                       <div className="col-span-8 flex items-start gap-4">
                         <button className="mt-0.5 flex-shrink-0 w-[22px] h-[22px] rounded-full border-2 border-gray-300 flex items-center justify-center text-gray-400 group-hover:border-blue-500 group-hover:text-blue-500 transition-colors">
@@ -325,7 +318,94 @@ export default function SubjectPage({ subjectName, onNavigate }) {
               </div>
             </div>
           )}
-          {activeTab !== "Lectures" && activeTab !== "Assignments" && (
+          {activeTab === "Quiz" && (
+            <div className="w-full mx-auto animate-in fade-in duration-500 max-w-6xl">
+              {/* Search and Filters */}
+              <div className="flex flex-col gap-4 mb-4">
+                <div className="relative w-full max-w-lg mb-2">
+                  <svg className="w-4 h-4 absolute left-4 top-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                  <input type="text" placeholder="Search assignments or questions" className="w-full border border-gray-200 rounded-lg pl-11 pr-4 py-2.5 text-sm focus:outline-none focus:border-blue-500 transition-shadow bg-white" />
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm font-medium text-gray-700">Filter assessments by</span>
+                    
+                    <button className="flex items-center gap-2 px-3 py-1.5 border border-gray-900 rounded-full text-[13px] font-medium text-gray-900 bg-white shadow-sm">
+                      Status is Attempted
+                      <svg className="w-3.5 h-3.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+
+                    <button className="flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 rounded-full text-[13px] font-medium text-gray-600 hover:bg-gray-50 transition bg-white shadow-sm">
+                      Module 
+                      <svg className="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    
+                    <button className="flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 rounded-full text-[13px] font-medium text-gray-600 hover:bg-gray-50 transition bg-white shadow-sm">
+                      More Filters 
+                      <svg className="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                  </div>
+
+                  <button className="text-[13px] font-bold text-gray-800 hover:text-black">
+                    Clear all filters
+                  </button>
+                </div>
+              </div>
+
+              {/* Table Header */}
+              <div className="mt-6 border-t border-gray-100 pt-2">
+                <div className="grid grid-cols-12 gap-4 pb-4 pt-4 text-[11px] font-bold text-gray-400 uppercase tracking-wider px-2 border-b border-gray-100">
+                  <div className="col-span-6">Quiz Contest</div>
+                  <div className="col-span-2 text-center">Status</div>
+                  <div className="col-span-2 text-center">XP Earned</div>
+                  <div className="col-span-2">Topics</div>
+                </div>
+
+                {/* Table Body */}
+                <div className="divide-y divide-gray-100 flex flex-col gap-1 mt-1">
+                  {(data.quizzes || []).map((quiz, idx) => (
+                    <div key={idx} className="grid grid-cols-12 gap-4 items-center py-5 px-2 hover:bg-gray-50 transition rounded-lg group">
+                      <div className="col-span-6 flex flex-col justify-center">
+                        <span className="text-xs text-gray-500 font-medium tracking-wide mb-1 uppercase">{quiz.subject}</span>
+                        <h4 className="font-bold text-gray-900 text-[13px] leading-snug truncate pr-6">{quiz.title}</h4>
+                        <span className="text-[11px] text-gray-400 font-bold mt-1.5 uppercase tracking-wide">{quiz.date}</span>
+                      </div>
+                      
+                      <div className="col-span-2 flex justify-center items-center">
+                        {quiz.status === "completed" ? (
+                          <div className="w-[18px] h-[18px] rounded-full bg-emerald-50 border border-emerald-500 text-emerald-500 flex items-center justify-center">
+                            <svg className="w-2.5 h-2.5 ml-[1px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
+                          </div>
+                        ) : (
+                          <div className="w-[18px] h-[18px] rounded-full bg-gray-50 border border-gray-400 text-gray-400 flex items-center justify-center">
+                            <svg className="w-2.5 h-2.5 ml-[1px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="col-span-2 flex items-center justify-center">
+                        <div className="flex items-center gap-1.5 text-[13px] font-bold text-gray-800">
+                          <span className="text-[#FFB800] bg-[#FFB800]/10 px-1 rounded text-[11px]">2x</span>
+                          <span className="text-[#FFB800] text-sm">🪙</span>
+                          <span>{quiz.xp}</span>
+                        </div>
+                      </div>
+
+                      <div className="col-span-2 flex flex-wrap gap-1.5 items-center">
+                        {quiz.topics.map((topic, tidx) => (
+                          <span key={tidx} className="bg-gray-50 text-gray-600 border border-gray-100 px-2 py-0.5 rounded text-[10px] font-bold truncate max-w-full">
+                            {topic}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+          {activeTab !== "Lectures" && activeTab !== "Assignments" && activeTab !== "Quiz" && (
             <div className="flex items-center justify-center h-full text-gray-400 font-medium">
               <div className="text-center space-y-4">
                 <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto">
