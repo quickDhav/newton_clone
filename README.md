@@ -7,7 +7,7 @@ A professional learning management system (LMS) dashboard clone built with React
 ##  Features
 
 * **Unified Dashboard**: View high-level performance across assignments, lectures, and quizzes.
-* **Subject-Specific Navigation**: Dedicated views for "FOAI Enigma," "WAP Turing," and "Maths-2 Turing" with unique stats and content.
+* **Subject-Specific Navigation**: Dedicated views for "FOAI Turing," "WAP Turing","Maths Turing" and DSA Turing with unique stats and content.
 * **Performance Visualization**: Custom progress cards with dynamic color coding based on completion percentages.
 * **Assignment Tracking**: Specialized interface to view due dates, XP rewards, and task status (Done/Pending).
 * **Live Event Banner**: Feature-rich home banner for "Question of the Day" and upcoming mock tests.
