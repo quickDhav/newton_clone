@@ -227,7 +227,105 @@ export default function SubjectPage({ subjectName, onNavigate }) {
               </div>
             </div>
           )}
-          {activeTab !== "Lectures" && (
+          {activeTab === "Assignments" && (
+            <div className="w-full max-w-5xl mx-auto animate-in fade-in duration-500">
+              {/* Header Stats */}
+              <div className="flex justify-between items-center mb-10">
+                <div className="flex items-center gap-5">
+                  <div className="w-16 h-16 bg-purple-600 rounded-2xl flex items-center justify-center shadow-md">
+                    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" /><path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" /></svg>
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold text-gray-900 leading-tight">Assignments</h2>
+                    <p className="text-gray-500 text-sm mt-0.5 font-medium">{data.cards ? data.cards.length : 0} pending</p>
+                  </div>
+                </div>
+                
+                <div className="bg-gray-50 rounded-2xl p-4 flex items-center gap-5 border border-gray-100">
+                  <div className="relative w-14 h-14 flex items-center justify-center">
+                     <svg className="w-14 h-14 transform -rotate-90 absolute inset-0">
+                        <circle cx="28" cy="28" r="24" stroke="currentColor" strokeWidth="6" fill="transparent" className="text-gray-200" />
+                        <circle cx="28" cy="28" r="24" stroke="currentColor" strokeWidth="6" fill="transparent" strokeDasharray="150" strokeDashoffset="50" className="text-purple-500" />
+                     </svg>
+                     <span className="text-sm font-bold text-gray-900 z-10 relative">{data.performance?.find(p => p.label === "My Assignments")?.val || "0%"}</span>
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">Completion</div>
+                    <div className="text-sm font-bold text-gray-900">{data.performance?.find(p => p.label === "My Assignments")?.count?.replace(/[\(\)]/g, '') || "0/0"} <span className="font-medium text-gray-500">Solved</span></div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Filters */}
+              <div className="flex flex-col gap-5 mb-8">
+                <div className="relative w-full max-w-md">
+                  <svg className="w-4 h-4 absolute left-4 top-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                  <input type="text" placeholder="Search assignments..." className="w-full border border-gray-200 rounded-xl pl-11 pr-4 py-3 text-sm focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-shadow bg-white" />
+                </div>
+                
+                <div className="flex flex-wrap items-center gap-2.5">
+                  {["Status v", "Type v", "Module v", "Topic v"].map(filt => (
+                    <button key={filt} className="px-4 py-2 border border-gray-200 rounded-full text-[13px] font-medium text-gray-600 hover:bg-gray-50 transition bg-white shadow-sm flex items-center gap-1.5">
+                      {filt.replace(' v', '')} 
+                      <svg className="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                  ))}
+                  <button className="px-4 py-2 border border-gray-200 rounded-full text-[13px] font-medium text-gray-600 hover:bg-gray-50 transition bg-white shadow-sm">
+                    Bookmarked
+                  </button>
+                </div>
+              </div>
+
+              {/* Table */}
+              <div className="mt-6 border-t border-gray-100 pt-2">
+                <div className="grid grid-cols-12 gap-4 pb-4 pt-4 text-[11px] font-bold text-gray-400 uppercase tracking-wider px-2">
+                  <div className="col-span-8">Assignment</div>
+                  <div className="col-span-2 text-center">Status</div>
+                  <div className="col-span-2 text-right pr-8">XP Available</div>
+                </div>
+
+                <div className="divide-y divide-gray-100 flex flex-col gap-1 mt-1">
+                  {(data.cards || []).map((card, idx) => {
+                    const isDone = card.xp && card.xp.split('/')[0] !== "0";
+                    return (
+                    <div key={idx} className="grid grid-cols-12 gap-4 items-center py-4 px-2 hover:bg-gray-50 transition rounded-xl group relative">
+                      <div className="col-span-8 flex items-start gap-4">
+                        <div className="mt-0.5 flex-shrink-0 w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center text-purple-600">
+                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" /><path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" /></svg>
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-[10px] font-bold text-purple-600 bg-purple-50 px-1.5 py-0.5 rounded uppercase">{card.type}</span>
+                            <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${card.due.includes('today') || card.due.includes('tomorrow') ? 'bg-orange-50 text-orange-600' : 'bg-gray-100 text-gray-600'}`}>{card.due}</span>
+                          </div>
+                          <h4 className="font-bold text-gray-900 text-sm leading-tight pr-4">{card.title}</h4>
+                        </div>
+                      </div>
+                      
+                      <div className="col-span-2 flex justify-center items-center">
+                        <span className={`text-[11px] font-bold px-2 py-1 rounded-full ${isDone ? 'bg-emerald-50 text-emerald-600' : 'bg-blue-50 text-blue-600'}`}>
+                          {isDone ? 'Completed' : 'Pending'}
+                        </span>
+                      </div>
+
+                      <div className="col-span-2 flex items-center justify-end gap-5 pr-4">
+                        <div className="flex items-center gap-1.5 text-[13px] font-bold text-gray-800">
+                          <span className="text-[#FFB800] bg-[#FFB800]/10 px-1.5 rounded">⚡</span>
+                          <span>{card.xp}</span>
+                        </div>
+                        {!isDone ? (
+                          <button className="bg-slate-900 text-white px-4 py-1.5 rounded text-xs font-bold hover:bg-slate-700 transition">Solve</button>
+                        ) : (
+                          <button className="bg-gray-100 text-gray-400 px-4 py-1.5 rounded text-xs font-bold cursor-not-allowed">Done</button>
+                        )}
+                      </div>
+                    </div>
+                  )})}
+                </div>
+              </div>
+            </div>
+          )}
+          {activeTab !== "Lectures" && activeTab !== "Assignments" && (
             <div className="flex items-center justify-center h-full text-gray-400 font-medium">
               <div className="text-center space-y-4">
                 <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto">
